@@ -13,8 +13,13 @@ function Product(name, path){
   totalProducts++;
 }
 
-
-
-
-
-
+function uniqueRandomizer(){
+  for(var i = 0; i < listOfProducts.length; i++){
+    for(var j = i + 1; j < listOfProducts.length; j++){
+      if(listOfProducts[i] === listOfProducts[j]){
+        return true;
+      }
+    }
+    return false;
+  }
+}
