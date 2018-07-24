@@ -11,6 +11,8 @@ var totalClicks = 0;
 
 function Product(name){
   this.name = name;
+
+  //
   this.path = `img${name}.jpg`;
 
   this.views = 0;
@@ -18,6 +20,7 @@ function Product(name){
   allProducts.push(this);
 }
 
+//
 for (var i = 0; i <productNames.length; i++){
   new Product(productNames[i]);
 }
@@ -28,6 +31,7 @@ function rando(){
 
 function threeRandomImages(){
   var randomIndexes = [];
+
   randomIndexes[0] = (rando());
   randomIndexes[1] = (rando());
 
@@ -42,6 +46,9 @@ function threeRandomImages(){
     randomIndexes[2] = rando();
     console.log('Last digit duplication prevented');
   }
+
+  //
+
   left.src = allProducts[randomIndexes[0]].path;
   center.src = allProducts[randomIndexes[1].path];
   right.src = allProducts[randomIndexes[2].path];
@@ -53,8 +60,8 @@ function threeRandomImages(){
   allProducts[randomIndexes[2]].views++;
 }
 
-
 function handleClick(event){
+  //
   if(event.target.id === 'container'){
     return alert('Please select a product.');
   }
@@ -65,14 +72,19 @@ function handleClick(event){
       allProducts[i].votes++;
     }
   }
+
   totalClicks++;
   console.log(totalClicks, 'total clicks');
+
   if(totalClicks > 4){
     alert('Thank you for your participation.');
     container.removeEventListener('click', handleClick);
-
+    //
   }
+
+  //
   threeRandomImages();
+  
 }
 
 threeRandomImages();
