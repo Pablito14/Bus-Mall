@@ -13,7 +13,7 @@ function Product(name){
   this.name = name;
 
   //
-  this.path = `img${name}.jpg`;
+  this.path = `img/${name}.jpg`;
 
   this.views = 0;
   this.clicks = 0;
@@ -50,18 +50,20 @@ function threeRandomImages(){
   //
 
   left.src = allProducts[randomIndexes[0]].path;
-  center.src = allProducts[randomIndexes[1].path];
-  right.src = allProducts[randomIndexes[2].path];
+  center.src = allProducts[randomIndexes[1]].path;
+  right.src = allProducts[randomIndexes[2]].path;
+
   left.title = allProducts[randomIndexes[0]].name;
   center.title = allProducts[randomIndexes[1]].name;
   right.title = allProducts[randomIndexes[2]].name;
+
   allProducts[randomIndexes[0]].views++;
   allProducts[randomIndexes[1]].views++;
   allProducts[randomIndexes[2]].views++;
 }
 
 function handleClick(event){
-  //
+
   if(event.target.id === 'container'){
     return alert('Please select a product.');
   }
