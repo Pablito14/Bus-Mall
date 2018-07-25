@@ -65,6 +65,7 @@ function threeRandomImages(){
 function handleClick(event){
 
   if(event.target.id === 'container'){
+    console.log('container', totalClicks);
     return alert('Please select a product.');
   }
 
@@ -78,15 +79,20 @@ function handleClick(event){
   totalClicks++;
   console.log(totalClicks, 'total clicks');
 
-  if(totalClicks > 4){
-    alert('Thank you for your participation.');
-    container.removeEventListener('click', handleClick);
-    //
+  if(totalClicks < 4){
+    threeRandomImages();
+    console.log('Total clicks < 4', totalClicks);
   }
 
   //
-  threeRandomImages();
-  
+  if(totalClicks === 5){
+    left.removeEventListener('click', handleClick);
+    center.removeEventListener('click', handleClick);
+    right.removeEventListener('click', handleClick);
+    container.removeEventListener('click', handleClick);
+    alert('Test');
+  }
+   
 }
 
 threeRandomImages();
