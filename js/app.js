@@ -16,7 +16,7 @@ function Product(name){
   this.path = `img/${name}.jpg`;
 
   this.views = 0;
-  this.clicks = 0;
+  this.votes = 0;
   allProducts.push(this);
 }
 
@@ -62,6 +62,20 @@ function threeRandomImages(){
   allProducts[randomIndexes[2]].views++;
 }
 
+function timesVotedDataset(){
+  var testArray = [];
+  for(var i =0; i < allProducts.length; i++){
+    testArray.push(allProducts[i].votes);
+  }
+  return testArray;
+}
+function getTitle(){
+  var anotherArray = [];
+  for(var i =0; i < allProducts.length; i++){
+    anotherArray.push(allProducts[i].name);
+  }
+  return anotherArray;
+}
 function handleClick(event){
 
   if(event.target.id === 'container'){
@@ -73,13 +87,14 @@ function handleClick(event){
   for(var i = 0; i < allProducts.length; i++){
     if(event.target.title === allProducts[i].name){
       allProducts[i].votes++;
+      console.log(allProducts[i]);
     }
   }
 
   totalClicks++;
   console.log(totalClicks, 'total clicks');
 
-  if(totalClicks < 4){
+  if(totalClicks <= 4){
     threeRandomImages();
     console.log('Total clicks < 4', totalClicks);
   }
@@ -91,9 +106,48 @@ function handleClick(event){
     right.removeEventListener('click', handleClick);
     container.removeEventListener('click', handleClick);
     alert('Test');
+    renderGraph();
   }
-   
-}
 
+}
+function renderGraph(){
+  var ctx = document.getElementById('chart');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: getTitle(),
+      datasets: [{
+        label: '# of Votes',
+        data: timesVotedDataset(),
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
+}
 threeRandomImages();
 container.addEventListener('click', handleClick);
