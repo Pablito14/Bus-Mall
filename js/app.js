@@ -1,11 +1,7 @@
 'use strict';
 
 var productNames =['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
-
 var allProducts=[];
-
-
-
 var left = document.getElementById('left');
 var center = document.getElementById('center');
 var right = document.getElementById('right');
@@ -14,16 +10,12 @@ var totalClicks = 0;
 
 function Product(name){
   this.name = name;
-
-  //
   this.path = `img/${name}.jpg`;
-
   this.views = 0;
   this.votes = 0;
   allProducts.push(this);
 }
 
-//
 for (var i = 0; i <productNames.length; i++){
   new Product(productNames[i]);
 }
@@ -34,23 +26,17 @@ function rando(){
 
 function threeRandomImages(){
   var randomIndexes = [];
-
   randomIndexes[0] = (rando());
   randomIndexes[1] = (rando());
-
   while(randomIndexes[0] === randomIndexes[1]){
     randomIndexes[1] = rando();
     console.log('Duplicate prevented');
   }
-
   randomIndexes[2] = rando();
-
   while(randomIndexes[2] === randomIndexes[0] || randomIndexes[2] === randomIndexes[1]){
     randomIndexes[2] = rando();
     console.log('Last digit duplication prevented');
   }
-
-  //
 
   left.src = allProducts[randomIndexes[0]].path;
   center.src = allProducts[randomIndexes[1]].path;
@@ -66,7 +52,6 @@ function threeRandomImages(){
 }
 
 function timesVotedDataset(){
-
   var testArray = [];
   for(var i =0; i < allProducts.length; i++){
     testArray.push(allProducts[i].votes);
@@ -88,12 +73,10 @@ function getTitle(){
   return anotherArray;
 }
 function handleClick(event){
-
   if(event.target.id === 'container'){
     console.log('container', totalClicks);
     return alert('Please select a product.');
   }
-
   console.log(event.target.title);
   for(var i = 0; i < allProducts.length; i++){
     if(event.target.title === allProducts[i].name){
@@ -101,16 +84,12 @@ function handleClick(event){
       console.log(allProducts[i]);
     }
   }
-
   totalClicks++;
   console.log(totalClicks, 'total clicks');
-
   if(totalClicks <= 25){
     threeRandomImages();
     console.log('Total clicks < 25', totalClicks);
   }
-
-  //
   if(totalClicks === 25){
     left.removeEventListener('click', handleClick);
     center.removeEventListener('click', handleClick);
@@ -119,14 +98,10 @@ function handleClick(event){
     alert('Test');
     renderGraph();
   }
-
 }
 
-
 function renderGraph(){
-
   localStorage.setItem('chartData', JSON.stringify(allProducts));
-
   var ctx = document.getElementById('chart');
   var myChart = new Chart(ctx, {
     type: 'bar',
