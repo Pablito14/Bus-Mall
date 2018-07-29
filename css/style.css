@@ -4,11 +4,11 @@
 }
 
 section{
-    border: 2px solid blue;
+    border: 2px solid rgb(132, 0, 255);
 }
 
 img{
-    border: 2px solid yellow;
+    border: 2px solid rgb(32, 184, 255);
     margin: 30px;
     width: 150px;
 }
